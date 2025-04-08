@@ -1,0 +1,82 @@
+*ygr.nvim.txt*    Git remote link helper for Neovim               Last updated: 2025-04-08
+
+==============================================================================
+NAME                                                              *ygr.nvim*
+
+ygr.nvim – Copy or open Git remote URLs to the current file/line in Neovim.
+
+==============================================================================
+DESCRIPTION
+
+This plugin enables you to generate permalinks to the current file, line,
+or selection on GitHub, GitLab, Bitbucket, or custom/private Git servers.
+
+It supports copying to the clipboard, opening in the browser, or both.
+
+==============================================================================
+COMMANDS                                                           *:GitLink*
+
+:GitLink           Copy link to the current line
+:GitLinkOpen       Open the link in your browser
+:GitLinkToggleOpen Toggle whether links should open automatically after copy
+
+==============================================================================
+MOTIONS / MAPPINGS
+
+Normal mode:
+    ygr            Copy permalink to current line
+    ygR            Open permalink to current line
+
+Visual mode:
+    ygr            Copy permalink for selected range
+
+These are defined automatically when the plugin is set up.
+
+==============================================================================
+CONFIGURATION                                                      *ygr-config*
+
+Example using lazy.nvim:
+
+```lua
+{
+  "yourusername/ygr.nvim",
+  version = "*",
+  config = function()
+    require("ygr").setup({
+      also_open = false,
+      preview_link = false,
+      provider_map = {
+        ["git.mycompany.com"] = "gitlab",
+      },
+    })
+  end,
+}
+```
+
+Available options:
+
+`also_open` (bool) - If true, opens the link after copying.
+
+`preview_link` (bool) - Show a floating window or notify preview.
+
+`provider_map` (table) - Map of domains → provider types (e.g. gitlab, github, bitbucket)
+
+============================================================================== PROVIDERS
+
+Supported:
+
+GitHub
+
+GitLab
+
+Bitbucket
+
+Custom/private Git servers are supported via `provider_map`.
+
+==============================================================================
+
+LICENSE ygr-license
+
+MIT © David Breitling — see LICENSE file for full terms.
+
+==============================================================================
